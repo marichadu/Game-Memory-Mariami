@@ -38,3 +38,7 @@ nav a:hover {
     background-color: #4CAF50;
     border-radius: 3px;
 }
+
+h2 {
+    text-align: center;
+}

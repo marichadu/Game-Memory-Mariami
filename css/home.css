@@ -116,3 +116,15 @@
         font-size: 2em;
     }
 }
+.cta-button.demo {
+    background-color: #ff9800;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button.demo:hover {
+    background-color: #e68900;
+}
