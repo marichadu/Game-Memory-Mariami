@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     gameBoard.parentNode.insertBefore(demoBanner, gameBoard);
 
-    // Create initial deck with face-down cards and play button
     function createInitialDeck() {
         // Clear game board
         gameBoard.innerHTML = '';
