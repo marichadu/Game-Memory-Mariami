@@ -1,80 +1,151 @@
+/* Demo and Example Profile Styles */
 .demo-banner {
     background-color: #ff9800;
     color: white;
-    text-align: center;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
 }
 
-.profile-section {
-    margin: 20px auto;
-    max-width: 800px;
+.example-profile {
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+.example-profile select:disabled,
+.example-profile button:disabled {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 8px;
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    cursor: not-allowed;
+}
+
+.example-profile button:disabled {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Form Styles */
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #675959;
+    border-radius: 4px;
+}
+
+#preferencesForm {
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.user-info, .game-preferences {
-    background-color: #f5f5f5;
+/* Profile Info Styles */
+.profile-info {
+    max-width: 400px;
+    margin: 20px auto;
     padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
 }
 
-.game-preferences select {
+/* Button Styles */
+.logout-btn {
+    display: block;
     width: 200px;
-    padding: 5px;
-    margin: 5px 0;
-}
-
-.button {
-    padding: 10px 20px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #ff4444;
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin: 10px 0;
-    color: white;
 }
 
-.save-button {
-    background-color: #4CAF50;
+.logout-btn:hover {
+    background-color: #cc0000;
 }
 
-.logout-button {
-    background-color: #f44336;
-}
-
-.scores-table {
+/* Table Styles */
+#scoresTable {
     width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
-.scores-table th, .scores-table td {
-    border: 1px solid #ddd;
+#scoresTable th, 
+#scoresTable td {
     padding: 8px;
-    text-align: left;
+    border: 1px solid #ddd;
+    text-align: center;
 }
 
-.scores-table th {
-    background-color: #4CAF50;
+#scoresTable th {
+    background-color: #903232;
     color: white;
 }
 
-.scores-table tr:nth-child(even) {
+#scoresTable tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
+/* Demo Buttons Styles */
+.demo-buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
-.signup-button {
-    background-color: #007BFF; /* Example background color */
-    color: #FFFFFF; /* Ensure text is white for contrast */
+.demo-buttons .cta-button {
+    padding: 12px 30px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.demo-buttons .signin {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.demo-buttons .signup {
+    background-color: #007BFF;
+    color: white;
+}
+
+.demo-buttons .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Sign In Prompt Style */
+.signin-prompt {
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+    padding: 12px 25px;
+    background-color: #007BFF;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 
-.signup-button:hover {
-    background-color: #0056b3; /* Darker shade for hover effect */
+.signin-prompt:hover {
+    background-color: #0056b3;
 }

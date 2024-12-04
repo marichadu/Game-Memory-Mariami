@@ -65,6 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
         gameBoard.parentNode.insertBefore(demoBanner, gameBoard);
     }
 
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
     function initializeGame(theme, size) {
         createInitialDeck(theme, size);
     }
@@ -73,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
         gameBoard.innerHTML = '';
         const deckContainer = document.createElement('div');
         deckContainer.className = 'deck-container';
+        deckContainer.setAttribute('data-size', size); // Add this line
+    
 
         const cardCount = getCardCount(size);
         const allImages = [...THEMES[theme].images];
@@ -143,32 +151,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function checkMatch() {
-        const [card1, card2] = flippedCards;
-        const match = card1.dataset.value === card2.dataset.value;
+function checkMatch() {
+    const [card1, card2] = flippedCards;
+    const match = card1.dataset.value === card2.dataset.value;
 
-        if (match) {
-            card1.classList.add('matched');
-            card2.classList.add('matched');
-            matchedPairs++;
-            score += 10;
-            scoreElement.textContent = score;
+    if (match) {
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        matchedPairs++;
+        score += 10;
+        scoreElement.textContent = score;
 
-            if (matchedPairs === cards.length / 2) {
-                endGame();
-            }
-        } else {
-            setTimeout(() => {
-                card1.classList.remove('flipped');
-                card2.classList.remove('flipped');
-            }, 1000);
-            score = Math.max(0, score - 1);
-            scoreElement.textContent = score;
+        if (matchedPairs === cards.length / 2) {
+            endGame();
         }
-
-        flippedCards = [];
+    } else {
+        setTimeout(() => {
+            card1.classList.remove('flipped');
+            card2.classList.remove('flipped');
+        }, 250); // Reduced from 500ms to 300ms
+        score = Math.max(0, score - 1);
+        scoreElement.textContent = score;
     }
 
+    flippedCards = [];
+}
     function startGame() {
         gameStarted = true;
         gameTimer = setInterval(() => {
@@ -183,13 +190,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function endGame() {
         clearInterval(gameTimer);
-        alert(`Congratulations! You won!\nScore: ${score}\nTime: ${formatTime(seconds)}\n\nSign up to access more themes and save your scores!`);
-    }
-
-    function formatTime(secs) {
-        const minutes = Math.floor(secs / 60);
-        const seconds = secs % 60;
-        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Get current user
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        // Create score object
+        const gameScore = {
+            date: new Date().toISOString(),
+            theme: theme,
+            size: size,
+            time: formatTime(seconds),
+            moves: score
+        };
+    
+        // Update user scores
+        if (currentUser) {
+            if (!currentUser.scores) {
+                currentUser.scores = [];
+            }
+            currentUser.scores.push(gameScore);
+            
+            // Update localStorage for current user
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
+            // Update user in users array
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.email === currentUser.email);
+            if (userIndex !== -1) {
+                users[userIndex].scores = currentUser.scores;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+            
+            alert(`Congratulations! You won!\nScore: ${score}\nTime: ${formatTime(seconds)}`);
+        } else {
+            alert(`Congratulations! You won!\nScore: ${score}\nTime: ${formatTime(seconds)}\n\nSign up to access more themes and save your scores!`);
+        }
     }
 
     initializeGame(theme, size);
