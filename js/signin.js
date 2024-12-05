@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = checkLoginStatus();
+    
+    if (currentUser) {
+        showWelcomeMessage(currentUser.username); // Use the function from utils.js
+        return;
+    }
+
     const form = document.getElementById('signinForm');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
@@ -15,12 +22,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const user = users.find(u => u.email === email.value.toLowerCase());
         
         if (!user) {
-            emailError.textContent = 'Email not found';
+            handleFormErrors(emailError, 'Email not found'); // Use the function from utils.js
             return;
         }
 
         if (user.password !== password.value) {
-            passwordError.textContent = 'Incorrect password';
+            handleFormErrors(passwordError, 'Incorrect password'); // Use the function from utils.js
             return;
         }
 

@@ -24,7 +24,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function logout() {
-    localStorage.removeItem('currentUser');
-    window.location.href = 'signin.html';
-}

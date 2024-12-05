@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const THEMES = {
+ const THEMES =  {
         vegetables: {
             path: 'images/vegetables/',
             images: ['1.svg', '2.svg', '3.svg', '4.svg', '5.svg', '6.svg']
@@ -11,10 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         wildAnimals: {
             path: 'images/wildAnimals/',
             images: ['1.webp', '2.webp', '3.webp', '4.webp', '5.webp', '6.webp', '7.webp', '8.webp', '9.webp', '10.webp', '11.webp', '12.webp', '13.webp', '14.webp', '15.webp', '16.webp', '17.webp', '18.webp', '19.webp', '20.webp', '21.webp', '22.webp', '23.webp', '24.webp', '25.webp', '26.webp', '27.webp', '28.webp']
-        },
-        alphabet: {
-            path: 'images/alphabet/',
-            images: ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png', '11.png', '12.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png', '19.png', '20.png', '21.png', '22.png', '23.png', '24.png', '25.png', '26.png']
         },
         dogs: {
             path: 'images/dogs/',
@@ -191,6 +187,9 @@ function checkMatch() {
     function endGame() {
         clearInterval(gameTimer);
         
+        if (seconds < 20) {
+            createEmojiConfetti();
+        }
         // Get current user
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         
@@ -226,6 +225,43 @@ function checkMatch() {
             alert(`Congratulations! You won!\nScore: ${score}\nTime: ${formatTime(seconds)}\n\nSign up to access more themes and save your scores!`);
         }
     }
+
+function createEmojiConfetti() {
+    const jsConfetti = new JSConfetti();
+    
+    jsConfetti.addConfetti({
+        emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+        emojiSize: 50,
+        confettiRadius: 6,
+        confettiNumber: 500,
+    });
+    // Continue celebration for 3 seconds
+    let count = 0;
+    const interval = setInterval(() => {
+        jsConfetti.addConfetti({
+            emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+            emojiSize: 30,
+            confettiRadius: 6,
+            confettiNumber: 200,
+        });
+        
+        count++;
+        if (count >= 3) {
+            clearInterval(interval);
+        }
+    }, 1000);
+
+    // Final burst after 3.5 seconds
+    setTimeout(() => {
+        jsConfetti.addConfetti({
+            emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+            emojiSize: 40,
+            confettiRadius: 8,
+            confettiNumber: 300,
+        });
+    }, 3500);
+
+}
 
     initializeGame(theme, size);
 });

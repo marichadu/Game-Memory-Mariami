@@ -6,22 +6,9 @@
     <title>Play Memory Game</title>
     <link rel="stylesheet" href="css/memory.css">
     <link rel="stylesheet" href="css/play.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </head>
 <body>
-    <header>
-        <h1>ENI Memory Game - Play</h1>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="signin.html">Sign In</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="play.html">Play</a></li>
-        </ul>
-    </nav>
-
     <main class="game-container">
         <div class="game-info">
             <div class="score">Score: <span id="score">0</span></div>
@@ -31,6 +18,15 @@
         <div id="game-board" class="game-board"></div>
     </main>
 
+    <script src="js/utils.js"></script>
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+        loadHeader().then(() => {
+            // Any page-specific initialization can go here
+        });
+    });
+   </script>
     <script src="js/play.js"></script>
+  
 </body>
 </html>

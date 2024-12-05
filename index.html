@@ -4,25 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENI Memory Game - Home</title>
+  
     <link rel="stylesheet" href="css/memory.css">
-    <link rel="stylesheet" href="css/home.css">
+    
 </head>
 <body>
-    <header>
-        <h1>Welcome to ENI Memory Game</h1>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="signin.html">Sign In</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="play.html">Play</a></li>
-        </ul>
-    </nav>
-
-    <main class="home-content">
+     <main class="home-content">
         <section class="welcome-section">
             <h2>Test Your Memory!</h2>
             <p>Challenge yourself with our memory card game. Match pairs of cards with different themes and difficulties.</p>
@@ -37,7 +24,7 @@
                 </div>
                 <div class="feature-card">
                     <h3>Different Sizes</h3>
-                    <p>Select your preferred game size from 3x3 to 6x6 grids.</p>
+                    <p>Select your preferred game size from 3x3 to 5x5 grids.</p>
                 </div>
                 <div class="feature-card">
                     <h3>Track Progress</h3>
@@ -50,7 +37,10 @@
             </div>
             
             <div class="game-preview">
-                <img src="images/memory_detail.png" alt="Memory Game Preview" class="preview-image">
+                <img src="images/memory_detail.png" 
+                alt="Interactive preview of the memory game interface" 
+                class="preview-image"
+                loading="lazy">
             </div>
         </section>
 
@@ -66,6 +56,12 @@
     </main>
 
     <script src="js/utils.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadHeader().then(() => {
+        });
+    });
+   </script>
     <script src="js/home.js"></script>
 </body>
 </html>
